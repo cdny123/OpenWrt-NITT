@@ -57,11 +57,11 @@ show_info() {
     echo "固件版本："$(sed -n  "/^DISTRIB_RELEASE=\'/p" /etc/openwrt_release|sed -e "s/DISTRIB_RELEASE='//g" -e "s/'//g" )
     echo "固件架构："$(sed -n  "/^DISTRIB_ARCH=\'/p" /etc/openwrt_release|sed -e "s/DISTRIB_ARCH='//g" -e "s/'//g" )
     if  [ -e "/etc/openwrt-k_info" ]; then
-        echo "固件编译者："$(sed -n  "/^COMPILER=\"/p" /etc/openwrt-k_info | sed -e "s/COMPILER=\"//g" -e "s/\"//g" )
-        echo "固件编译仓库地址："$(sed -n  "/REPOSITORY_URL=\"/p" /etc/openwrt-k_info | sed -e "s/REPOSITORY_URL=\"//g" -e "s/\"//g" )
-        echo "固件编译时间：UTC+8 "$(sed -n  "/^COMPILE_START_TIME=\"/p" /etc/openwrt-k_info | sed -e "s/COMPILE_START_TIME=\"//g" -e "s/\"/时/g" -e "s/-/日/" -e "s/\./月/g" -e "s/月/年/" )
+        echo "固件编译者："$(sed -n  "/^COMPILER=\"/p" /etc/OpenWrt-NITT_info | sed -e "s/COMPILER=\"//g" -e "s/\"//g" )
+        echo "固件编译仓库地址："$(sed -n  "/REPOSITORY_URL=\"/p" /etc/OpenWrt-NITT_info | sed -e "s/REPOSITORY_URL=\"//g" -e "s/\"//g" )
+        echo "固件编译时间：UTC+8 "$(sed -n  "/^COMPILE_START_TIME=\"/p" /etc/OpenWrt-NITT_info | sed -e "s/COMPILE_START_TIME=\"//g" -e "s/\"/时/g" -e "s/-/日/" -e "s/\./月/g" -e "s/月/年/" )
     elif [ "$(grep -c "Compiled by" /etc/openwrt_release)" -ne '0' ];then
-        echo "固件编译者："$(sed -n  "/Compiled by /p" /etc/openwrt_release|sed -e "s/.*Compiled by //g" -e "s/'//g" )
+        echo "固件编译者："$(sed -n  "/Compiled by /p" /etc/openwrt_release|sed -e "s/.*Compiled by 04543473//g" -e "s/'//g" )
     fi
 }
 
@@ -286,16 +286,16 @@ update_tool() {
         exit 1
         ;;
     esac
-    curl -L --retry 3 --connect-timeout 20 https://raw.githubusercontent.com/chenmozhijin/OpenWrt-K/main/files/usr/share/cmzj/openwrt-k_tool.sh -o $TMPDIR/openwrt-k_tool.sh || download_failed
+    curl -L --retry 3 --connect-timeout 20 https://raw.githubusercontent.com/cdny123/OpenWrt-NITT/main/files/usr/share/cmzj/openwrt-k_tool.sh -o $TMPDIR/openwrt-k_tool.sh || download_failed
     chmod +x $TMPDIR/openwrt-k_tool.sh
     mv $TMPDIR/openwrt-k_tool.sh /usr/share/cmzj/openwrt-k_tool.sh && exit 0
 }
 
 usage() {
     echo "OpenWrt-K工具"
-    echo "固件项目地址：https://github.com/chenmozhijin/OpenWrt-K"
+    echo "固件项目地址：https://github.com/cdny123/OpenWrt-NITT"
     echo ""
-    echo "Usage: openwrt-k <command> [<arguments>]"
+    echo "Usage: openWrt-nitt <command> [<arguments>]"
     echo ""
     echo "Commands:"
     echo "update <packages|rules|tool>              更新包/规则/本工具"
